@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FCyJ | Quienes somos</title>
+    <meta name="description" content="Quienes formamos parte de la fundación" />
+    <link rel="icon" type="image/png" sizes="32x41" href="/assets/favicon32.png">
+    <link rel="icon" type="image/png" sizes="16x20" href="/assets/favicon16.png">
+    <!-- Tailwind (CDN) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f5f8ff', 100: '#eaf0ff', 200: '#cddbff', 300: '#aac0ff',
+                            400: '#7b9cff', 500: '#4f79ff', 600: '#355be6', 700: '#2a46b3',
+                            800: '#22388c', 900: '#1d2f73',
+                        },
+                    },
+                    fontFamily: {
+                        heading: ['Jost', 'Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+                        sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif']
+                    },
+                    container: { center: true, padding: '1rem' },
+                    keyframes: {
+                        marquee: { '0%': { transform: 'translateX(0)' }, '100%': { transform: 'translateX(-50%)' } }
+                    },
+                    animation: { marquee: 'marquee 30s linear infinite' }
+                }
+            }
+        }
+    </script>
+
+    <!-- Componentes reutilizables -->
+    <style type="text/tailwindcss">
+        @layer components {
+      .btn { @apply inline-flex items-center justify-center rounded-full px-5 py-2.5 text-sm font-semibold transition; }
+      .btn-primary { @apply bg-brand-600 text-white hover:bg-brand-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-600; }
+      .btn-outline { @apply border text-neutral-900 hover:bg-neutral-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-400; }
+      .link-arrow { @apply inline-flex items-center gap-2 text-sm font-semibold; }
+      .card { @apply rounded-2xl border bg-white shadow-sm transition hover:shadow-md; }
+      .icon-box { @apply h-10 w-10 shrink-0 rounded-xl border flex items-center justify-center; }
+    }
+  </style>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- JS global (defer) -->
+    <script src="/assets/site.js" defer></script>
+</head>
+<!-- ===== Navbar ===== -->
+<header class="border-b bg-white">
+    <div class="container mx-auto max-w-7xl px-4">
+        <div class="flex h-16 items-center justify-between">
+            <!-- Logo -->
+            <a href="/" class="flex items-center gap-3 shrink-0">
+                <img src="/assets/fcj-logo.svg" alt="Fundación Ciencia y Justicia" class="h-9 w-auto" />
+                <span class="hidden sm:block leading-tight">
+                    <span class="block text-xs tracking-wider">FUNDACIÓN</span>
+                    <span class="block -mt-0.5 text-xs tracking-wider">CIENCIA Y</span>
+                    <span class="block -mt-0.5 text-xs tracking-wider">JUSTICIA</span>
+                </span>
+            </a>
+
+            <!-- Desktop nav -->
+            <nav class="hidden md:flex items-center gap-8" aria-label="Principal">
+                <a href="/index.html" class="text-sm text-neutral-800 hover:text-neutral-950">Home</a>
+                <a href="#" class="text-sm text-neutral-800 hover:text-neutral-950">Quienes somos</a>
+                <a href="work.html" class="text-sm text-neutral-800 hover:text-neutral-950">Qué hacemos</a>
+                <a href="solutions.html" class="text-sm text-neutral-800 hover:text-neutral-950">Soluciones y Proyectos</a>
+
+                <!-- Dropdown -->
+                <div class="relative">
+                    <button id="resourcesBtn"
+                        class="flex items-center gap-1 text-sm text-neutral-800 hover:text-neutral-950"
+                        aria-haspopup="true" aria-expanded="false" aria-controls="resourcesMenu">
+                        Más recursos
+                        <svg class="h-4 w-4 transition-transform" viewBox="0 0 20 20" fill="currentColor"
+                            aria-hidden="true">
+                            <path fill-rule="evenodd"
+                                d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.25 8.29a.75.75 0 01-.02-1.08z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                    <div id="resourcesMenu"
+                        class="invisible absolute left-0 top-full z-20 mt-2 w-56 translate-y-1 rounded-xl border bg-white p-2 opacity-0 shadow-lg transition data-[open=true]:visible data-[open=true]:translate-y-0 data-[open=true]:opacity-100"
+                        role="menu" aria-labelledby="resourcesBtn">
+                        <a href="#"
+                            class="block rounded-lg px-3 py-2 text-sm text-neutral-700 hover:bg-neutral-50">Blog</a>
+                        <a href="#"
+                            class="block rounded-lg px-3 py-2 text-sm text-neutral-700 hover:bg-neutral-50">Publicaciones</a>
+                        <a href="#"
+                            class="block rounded-lg px-3 py-2 text-sm text-neutral-700 hover:bg-neutral-50">Material
+                            educativo</a>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- Actions (desktop) -->
+            <div class="hidden md:flex items-center gap-3">
+                <a href="#" class="btn btn-outline">Involucrate</a>
+                <a href="#" class="btn btn-primary">Contactanos</a>
+            </div>
+
+            <!-- Mobile toggle -->
+            <button id="mobileToggle"
+                class="md:hidden inline-flex h-10 w-10 items-center justify-center rounded-lg border"
+                aria-label="Abrir menú" aria-controls="mobileMenu" aria-expanded="false">
+                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Mobile menu -->
+    <div id="mobileMenu" class="md:hidden hidden border-t">
+        <div class="container mx-auto max-w-7xl px-4 py-3">
+            <nav class="flex flex-col gap-2">
+                <a href="index.html" class="rounded-lg px-3 py-2 text-sm hover:bg-neutral-50">Home</a>
+                    <a href="about.html" class="rounded-lg px-3 py-2 text-sm hover:bg-neutral-50">Quienes somos</a>
+                    <a href="work.html" class="rounded-lg px-3 py-2 text-sm hover:bg-neutral-50">Qué hacemos</a>
+                    <a href="solutions.html" class="rounded-lg px-3 py-2 text-sm hover:bg-neutral-50">Soluciones y Proyectos</a>
+
+                <details class="rounded-lg px-3 py-2 text-sm open:bg-neutral-50">
+                    <summary class="cursor-pointer list-none">Más recursos</summary>
+                    <div class="mt-2 ml-2 flex flex-col gap-1">
+                        <a href="#" class="rounded px-2 py-1 hover:bg-neutral-100">Blog</a>
+                        <a href="#" class="rounded px-2 py-1 hover:bg-neutral-100">Publicaciones</a>
+                        <a href="#" class="rounded px-2 py-1 hover:bg-neutral-100">Material educativo</a>
+                    </div>
+                </details>
+
+                <div class="mt-2 flex items-center gap-2">
+                    <a href="#" class="btn btn-outline flex-1">Involucrate</a>
+                    <a href="#" class="btn btn-primary flex-1">Contactanos</a>
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<body>
+    <main>
+
+         </main>
+
+
+    <!-- ===== Footer ===== -->
+    <footer class="bg-white">
+        <div class="container mx-auto max-w-7xl px-4 pt-12">
+            <!-- Top: 3 columnas -->
+            <div class="grid grid-cols-3 gap-10 md:grid-cols-3">
+                <!-- Columna 1: Logo + contacto + redes -->
+                <div class="md:pr-10">
+                    <a href="/" class="flex items-center gap-3">
+                        <img src="/assets/blanco_background.png" alt="Fundación Ciencia y Justicia" class="h-14 w-auto">
+                        <span class="sr-only">Fundación Ciencia y Justicia</span>
+                    </a>
+
+                    <div class="mt-6 space-y-5 text-sm">
+                        <div>
+                            <div class="font-semibold text-neutral-900">Sede Central</div>
+                            <p class="mt-1 text-neutral-600">
+                                Avenida Del Libertador 1000, Vicente López, Argentina
+                            </p>
+                        </div>
+
+                        <div>
+                            <div class="font-semibold text-neutral-900">Escríbenos</div>
+                            <a href="mailto:email@fundacioncienciayjusticia.org"
+                                class="mt-1 inline-block text-neutral-900 underline decoration-neutral-300 hover:decoration-neutral-700">
+                                contacto@cienciayjusticia.org
+                            </a>
+                        </div>
+
+                        <div class="flex items-center gap-4 pt-2">
+                            <a aria-label="Facebook" href="#" class="text-neutral-700 hover:text-neutral-900">
+                                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M13 10h3l-1 4h-2v8h-4v-8H7v-4h2V8a4 4 0 0 1 4-4h3v4h-3a1 1 0 0 0-1 1v1z" />
+                                </svg>
+                            </a>
+                            <a aria-label="Instagram" href="#" class="text-neutral-700 hover:text-neutral-900">
+                                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm5 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm6-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zM12 9a3 3 0 1 1 0 6 3 3 0 0 1 0-6z" />
+                                </svg>
+                            </a>
+                            <a aria-label="X" href="#" class="text-neutral-700 hover:text-neutral-900">
+                                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M3 3h4.3l4.2 6 4.7-6H21l-7.3 9.2L21 21h-4.3l-4.6-6.4L7 21H3l7.6-9.7z" />
+                                </svg>
+                            </a>
+                            <a aria-label="LinkedIn" href="#" class="text-neutral-700 hover:text-neutral-900">
+                                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M4 3a2 2 0 1 0 0 4 2 2 0 0 0 0-4zM3 8h3.9v13H3zM14.5 8A5.5 5.5 0 0 1 20 13.5V21h-3.9v-6.2c0-1.7-.9-2.8-2.4-2.8s-2.5 1.1-2.5 2.8V21H7.3V8H11v1.9C11.6 9.2 13 8 14.5 8z" />
+                                </svg>
+                            </a>
+                            <a aria-label="YouTube" href="#" class="text-neutral-700 hover:text-neutral-900">
+                                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M23 12s0-3.4-.4-5a3 3 0 0 0-2-2C18.9 4.3 12 4.3 12 4.3s-6.9 0-8.6.7a3 3 0 0 0-2 2C1 8.6 1 12 1 12s0 3.4.4 5a3 3 0 0 0 2 2c1.7.7 8.6.7 8.6.7s6.9 0 8.6-.7a3 3 0 0 0 2-2c.4-1.6.4-5 .4-5zM10 15.5v-7l6 3.5-6 3.5z" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Columna 2 -->
+                <div class="space-y-4 text-sm">
+                    <a href="#" class="block font-semibold text-neutral-900">Sobre la Fundación</a>
+                    <a href="#" class="block hover:underline">Qué hacemos</a>
+                    <a href="#" class="block hover:underline">Proyectos</a>
+                    <a href="#" class="block hover:underline">Únete a la FCJ</a>
+                </div>
+
+                <!-- Columna 3 -->
+                <div class="space-y-4 text-sm">
+                    <a href="#" class="block font-semibold text-neutral-900">Noticias</a>
+                    <a href="#" class="block hover:underline">Recursos y Herramientas</a>
+                    <a href="#" class="block hover:underline">Eventos</a>
+                </div>
+            </div>
+
+            <!-- Subfooter (fuera del grid) -->
+            <div class="mt-10 border-t pt-6 pb-12">
+                <div
+                    class="flex flex-col gap-4 text-sm text-neutral-600 md:flex-row md:items-center md:justify-between">
+                    <p>© 2025 Fundación Ciencia y Justicia. Todos los derechos reservados.</p>
+
+                </div>
+            </div>
+    </footer>
+</body>
+
+</html>

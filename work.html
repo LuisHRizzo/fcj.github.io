@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FCyJ | Que Hacemos</title>
+    <meta name="description" content="Quienes formamos parte de la fundación" />
+    <link rel="icon" type="image/png" sizes="32x41" href="/assets/favicon32.png">
+    <link rel="icon" type="image/png" sizes="16x20" href="/assets/favicon16.png">
+    <!-- Tailwind (CDN) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f5f8ff', 100: '#eaf0ff', 200: '#cddbff', 300: '#aac0ff',
+                            400: '#7b9cff', 500: '#4f79ff', 600: '#355be6', 700: '#2a46b3',
+                            800: '#22388c', 900: '#1d2f73',
+                        },
+                    },
+                    fontFamily: {
+                        heading: ['Jost', 'Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+                        sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif']
+                    },
+                    container: { center: true, padding: '1rem' },
+                    keyframes: {
+                        marquee: { '0%': { transform: 'translateX(0)' }, '100%': { transform: 'translateX(-50%)' } }
+                    },
+                    animation: { marquee: 'marquee 30s linear infinite' }
+                }
+            }
+        }
+    </script>
+
+    <!-- Componentes reutilizables -->
+    <style type="text/tailwindcss">
+        @layer components {
+      .btn { @apply inline-flex items-center justify-center rounded-full px-5 py-2.5 text-sm font-semibold transition; }
+      .btn-primary { @apply bg-brand-600 text-white hover:bg-brand-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-600; }
+      .btn-outline { @apply border text-neutral-900 hover:bg-neutral-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-400; }
+      .link-arrow { @apply inline-flex items-center gap-2 text-sm font-semibold; }
+      .card { @apply rounded-2xl border bg-white shadow-sm transition hover:shadow-md; }
+      .icon-box { @apply h-10 w-10 shrink-0 rounded-xl border flex items-center justify-center; }
+    }
+  </style>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- JS global (defer) -->
+    <script src="/assets/site.js" defer></script>
+</head>
+<!-- ===== Navbar ===== -->
+<header class="border-b bg-white">
+    <div class="container mx-auto max-w-7xl px-4">
+        <div class="flex h-16 items-center justify-between">
+            <!-- Logo -->
+            <a href="/" class="flex items-center gap-3 shrink-0">
+                <img src="/assets/fcj-logo.svg" alt="Fundación Ciencia y Justicia" class="h-9 w-auto" />
+                <span class="hidden sm:block leading-tight">
+                    <span class="block text-xs tracking-wider">FUNDACIÓN</span>
+                    <span class="block -mt-0.5 text-xs tracking-wider">CIENCIA Y</span>
+                    <span class="block -mt-0.5 text-xs tracking-wider">JUSTICIA</span>
+                </span>
+            </a>
+
+            <!-- Desktop nav -->
+            <nav class="hidden md:flex items-center gap-8" aria-label="Principal">
+                <a href="/index.html" class="text-sm text-neutral-800 hover:text-neutral-950">Home</a>
+                <a href="about.html" class="text-sm text-neutral-800 hover:text-neutral-950">Quienes somos</a>
+                <a href="#" class="text-sm text-neutral-800 hover:text-neutral-950">Qué hacemos</a>
+                <a href="solutions.html" class="text-sm text-neutral-800 hover:text-neutral-950">Soluciones y
+                    Proyectos</a>
+
+                <!-- Dropdown -->
+                <div class="relative">
+                    <button id="resourcesBtn"
+                        class="flex items-center gap-1 text-sm text-neutral-800 hover:text-neutral-950"
+                        aria-haspopup="true" aria-expanded="false" aria-controls="resourcesMenu">
+                        Más recursos
+                        <svg class="h-4 w-4 transition-transform" viewBox="0 0 20 20" fill="currentColor"
+                            aria-hidden="true">
+                            <path fill-rule="evenodd"
+                                d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.25 8.29a.75.75 0 01-.02-1.08z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                    <div id="resourcesMenu"
+                        class="invisible absolute left-0 top-full z-20 mt-2 w-56 translate-y-1 rounded-xl border bg-white p-2 opacity-0 shadow-lg transition data-[open=true]:visible data-[open=true]:translate-y-0 data-[open=true]:opacity-100"
+                        role="menu" aria-labelledby="resourcesBtn">
+                        <a href="#"
+                            class="block rounded-lg px-3 py-2 text-sm text-neutral-700 hover:bg-neutral-50">Blog</a>
+                        <a href="#"
+                            class="block rounded-lg px-3 py-2 text-sm text-neutral-700 hover:bg-neutral-50">Publicaciones</a>
+                        <a href="#"
+                            class="block rounded-lg px-3 py-2 text-sm text-neutral-700 hover:bg-neutral-50">Material
+                            educativo</a>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- Actions (desktop) -->
+            <div class="hidden md:flex items-center gap-3">
+                <a href="#" class="btn btn-outline">Involucrate</a>
+                <a href="#" class="btn btn-primary">Contactanos</a>
+            </div>
+
+            <!-- Mobile toggle -->
+            <button id="mobileToggle"
+                class="md:hidden inline-flex h-10 w-10 items-center justify-center rounded-lg border"
+                aria-label="Abrir menú" aria-controls="mobileMenu" aria-expanded="false">
+                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Mobile menu -->
+    <div id="mobileMenu" class="md:hidden hidden border-t">
+        <div class="container mx-auto max-w-7xl px-4 py-3">
+            <nav class="flex flex-col gap-2">
+                <a href="index.html" class="rounded-lg px-3 py-2 text-sm hover:bg-neutral-50">Home</a>
+                <a href="about.html" class="rounded-lg px-3 py-2 text-sm hover:bg-neutral-50">Quienes somos</a>
+                <a href="work.html" class="rounded-lg px-3 py-2 text-sm hover:bg-neutral-50">Qué hacemos</a>
+                <a href="solutions.html" class="rounded-lg px-3 py-2 text-sm hover:bg-neutral-50">Soluciones y
+                    Proyectos</a>
+
+                <details class="rounded-lg px-3 py-2 text-sm open:bg-neutral-50">
+                    <summary class="cursor-pointer list-none">Más recursos</summary>
+                    <div class="mt-2 ml-2 flex flex-col gap-1">
+                        <a href="#" class="rounded px-2 py-1 hover:bg-neutral-100">Blog</a>
+                        <a href="#" class="rounded px-2 py-1 hover:bg-neutral-100">Publicaciones</a>
+                        <a href="#" class="rounded px-2 py-1 hover:bg-neutral-100">Material educativo</a>
+                    </div>
+                </details>
+
+                <div class="mt-2 flex items-center gap-2">
+                    <a href="#" class="btn btn-outline flex-1">Involucrate</a>
+                    <a href="#" class="btn btn-primary flex-1">Contactanos</a>
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<body>
+    <main>
+
+        <!-- HERO -->
+        <section class="relative isolate overflow-hidden bg-neutral-700 text-white">
+            <div class="container mx-auto max-w-7xl px-4 py-20 sm:py-24 lg:py-28">
+                <p class="text-sm font-semibold text-white/80">Innovación</p>
+
+                <h1 class="mt-4 text-5xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight">
+                    Accionando para
+                </h1>
+                <h1 class="mt-4 text-5xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight">
+                    el futuro
+                </h1>
+
+                <p class="mt-6 max-w-3xl text-lg text-white/85">
+                    Innovamos, desarrollamos y educamos para una sociedad más justa, segura y tecnológicamente preparada
+                </p>
+
+                <div class="mt-8 flex flex-wrap gap-3">
+                    <!-- Si tenés las utilidades .btn, podés reemplazar estas clases por .btn/.btn-primary -->
+                    <a href="#accion" class="btn btn-outline text-white">
+                        Explora
+                    </a>
+                    <a href="#enfoque" class="btn btn-primary">
+                        Conoce
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ACCIÓN -->
+        <section id="accion" class="py-12 md:py-16">
+            <div class="container mx-auto max-w-7xl px-4">
+                <div class="grid items-start gap-12 lg:gap-16 md:grid-cols-3">
+                    <!-- Intro -->
+                    <div>
+                        <p class="text-sm font-semibold text-neutral-500">Acción</p>
+                        <h2 class="mt-2 text-4xl sm:text-5xl font-extrabold tracking-tight">
+                            Nuestras líneas <br class="hidden sm:block" /> de acción
+                        </h2>
+                        <p class="mt-4 text-neutral-600">
+                            En la Fundación Ciencia y Sociedad, nos dedicamos a transformar ideas en realidades.
+                            Nuestras líneas de acción están diseñadas para abordar los desafíos contemporáneos
+                            mediante la innovación y la colaboración.
+                        </p>
+
+                        <div class="mt-6 flex flex-wrap gap-3">
+                            <a href="#descubre"
+                                class="inline-flex items-center justify-center rounded-full border px-4 py-2 text-sm font-medium hover:bg-neutral-50">
+                                Descubre
+                            </a>
+                            <a href="#mas"
+                                class="group inline-flex items-center gap-1 rounded-full px-2.5 py-2 text-sm font-semibold">
+                                Más
+                                <svg class="h-4 w-4 transition-transform group-hover:translate-x-0.5"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 5l7 7-7 7" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Líneas de acción -->
+                    <div class="md:col-span-2">
+                        <div class="grid gap-12 sm:grid-cols-2">
+                            <!-- 1 -->
+                            <article>
+                                <div class="mb-4 h-10 w-10 rounded-xl border flex items-center justify-center">
+                                    <!-- icono matraz -->
+                                    <svg class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                        <path
+                                            d="M9 3h6v2h-1v4.3l4.7 6.6A3 3 0 0 1 15.2 19H8.8a3 3 0 0 1-3.5-3.1L10 9.3V5H9V3zM8.8 17h6.4a1 1 0 0 0 .8-1.6L12 9.7l-4 5.7a1 1 0 0 0 .8 1.6z" />
+                                    </svg>
+                                </div>
+                                <h3 class="text-2xl sm:text-3xl font-extrabold tracking-tight">
+                                    Investigación aplicada y desarrollo tecnológico
+                                </h3>
+                                <p class="mt-3 text-neutral-600">
+                                    Desarrollamos soluciones innovadoras que responden a las necesidades sociales.
+                                </p>
+                            </article>
+
+                            <!-- 2 -->
+                            <article>
+                                <div class="mb-4 h-10 w-10 rounded-xl border flex items-center justify-center">
+                                    <!-- icono birrete -->
+                                    <svg class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                        <path
+                                            d="M12 3 2 8l10 5 8-4v5h2V8L12 3Zm-6 9v4c0 1.7 3.6 3 6 3s6-1.3 6-3v-4l-6 3-6-3Z" />
+                                    </svg>
+                                </div>
+                                <h3 class="text-2xl sm:text-3xl font-extrabold tracking-tight">
+                                    Formación y capacitación profesional
+                                </h3>
+                                <p class="mt-3 text-neutral-600">
+                                    Ofrecemos programas de formación accesibles para todos.
+                                </p>
+                            </article>
+
+                            <!-- 3 -->
+                            <article>
+                                <div class="mb-4 h-10 w-10 rounded-xl border flex items-center justify-center">
+                                    <!-- icono escudo -->
+                                    <svg class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                        <path d="M12 2 4 5v6c0 5 3.4 9.4 8 11 4.6-1.6 8-6 8-11V5l-8-3z" />
+                                    </svg>
+                                </div>
+                                <h3 class="text-2xl sm:text-3xl font-extrabold tracking-tight">
+                                    Diseño de políticas públicas basadas en evidencia
+                                </h3>
+                                <p class="mt-3 text-neutral-600">
+                                    Creamos políticas que reflejan datos y realidades sociales.
+                                </p>
+                            </article>
+
+                            <!-- 4 -->
+                            <article>
+                                <div class="mb-4 h-10 w-10 rounded-xl border flex items-center justify-center">
+                                    <!-- icono gráfico -->
+                                    <svg class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                        <path d="M4 20h16v-2H4v2ZM6 10h2v6H6v-6Zm5-4h2v10h-2V6Zm5 3h2v7h-2V9Z" />
+                                    </svg>
+                                </div>
+                                <h3 class="text-2xl sm:text-3xl font-extrabold tracking-tight">
+                                    Consultoría técnica y auditoría
+                                </h3>
+                                <p class="mt-3 text-neutral-600">
+                                    Brindamos asesoría experta para mejorar procesos y resultados.
+                                </p>
+                            </article>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- INNOVACIÓN: -->
+        <section id="innovacion" class="py-12 md:py-16">
+            <div class="container mx-auto max-w-7xl px-4">
+                <!-- Encabezado -->
+                <p class="text-sm font-semibold text-neutral-500">Innovación</p>
+                <h2 class="mt-2 text-4xl sm:text-5xl font-extrabold tracking-tight">
+                    Nuestras Áreas de Trabajo
+                </h2>
+                <p class="mt-3 max-w-2xl text-neutral-600">
+                    En la Fundación Ciencia y Sociedad, nos dedicamos a impulsar el desarrollo tecnológico y social.
+                    Nuestra misión es crear un entorno inclusivo y seguro mediante la innovación.
+                </p>
+
+                <div class="mt-6 flex flex-wrap gap-3">
+                    <a href="#descubre"
+                        class="inline-flex items-center justify-center rounded-full border px-4 py-2 text-sm font-medium hover:bg-neutral-50">
+                        Descubre
+                    </a>
+                    <a href="#explora"
+                        class="group inline-flex items-center gap-1 rounded-full px-2.5 py-2 text-sm font-semibold">
+                        Explora
+                        <svg class="h-4 w-4 transition-transform group-hover:translate-x-0.5" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </a>
+                </div>
+
+                <!-- Cards: 1 col en mobile, 2 cols desde md, nunca 3 -->
+                <div class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 items-stretch">
+                    <!-- Card 1 -->
+                    <article class="flex h-full flex-col rounded-2xl border p-5 sm:p-6">
+                        <div class="mb-4 h-10 w-10 rounded-xl border flex items-center justify-center">
+                            <!-- matraz -->
+                            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M9 3h6v2h-1v4.3l4.7 6.6A3 3 0 0 1 15.2 19H8.8a3 3 0 0 1-3.5-3.1L10 9.3V5H9V3zM8.8 17h6.4a1 1 0 0 0 .8-1.6L12 9.7l-4 5.7a1 1 0 0 0 .8 1.6z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl sm:text-2xl font-extrabold tracking-tight">Ciencia y Tecnología</h3>
+                        <p class="mt-2 text-sm text-neutral-700">
+                            Fomentamos la investigación y el desarrollo para abordar desafíos contemporáneos con
+                            soluciones innovadoras y accesibles.
+                        </p>
+                    </article>
+
+                    <!-- Card 2 -->
+                    <article class="flex h-full flex-col rounded-2xl border p-5 sm:p-6">
+                        <div class="mb-4 h-10 w-10 rounded-xl border flex items-center justify-center">
+                            <!-- balanza -->
+                            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M12 3h2v2h4v2h-2.1l2.9 5h-8l2.9-5H10V5h2V3ZM7 9 4 14h6L7 9Zm13 5c0 2.2-2.2 4-5 4-1.2 0-2.3-.3-3.1-.8l-1.2 2.1-1.7-1 1.2-2.1c-.8-.7-1.2-1.6-1.2-2.6h2c0 .7.5 1.3 1.2 1.7.6.3 1.3.5 2 .5 1.7 0 3-.9 3-2H20Z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl sm:text-2xl font-extrabold tracking-tight">Justicia y Seguridad</h3>
+                        <p class="mt-2 text-sm text-neutral-700">
+                            Impulsamos políticas y tecnologías que protegen a las comunidades y fortalecen la confianza
+                            pública.
+                        </p>
+                    </article>
+
+                    <!-- Card 3 -->
+                    <article class="flex h-full flex-col rounded-2xl border p-5 sm:p-6">
+                        <div class="mb-4 h-10 w-10 rounded-xl border flex items-center justify-center">
+                            <!-- birrete -->
+                            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M12 3 2 8l10 5 8-4v5h2V8L12 3Zm-6 9v4c0 1.7 3.6 3 6 3s6-1.3 6-3v-4l-6 3-6-3Z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl sm:text-2xl font-extrabold tracking-tight">Educación en Tecnología</h3>
+                        <p class="mt-2 text-sm text-neutral-700">
+                            Programas de formación accesibles que empoderan a las personas en el uso de tecnologías.
+                        </p>
+                    </article>
+
+                    <!-- Card 4 -->
+                    <article class="flex h-full flex-col rounded-2xl border p-5 sm:p-6">
+                        <div class="mb-4 h-10 w-10 rounded-xl border flex items-center justify-center">
+                            <!-- escudo -->
+                            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 2 4 5v6c0 5 3.4 9.4 8 11 4.6-1.6 8-6 8-11V5l-8-3z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl sm:text-2xl font-extrabold tracking-tight">Ciberseguridad</h3>
+                        <p class="mt-2 text-sm text-neutral-700">
+                            Desarrollamos capacidades para proteger datos y sistemas críticos y garantizar la integridad
+                            digital.
+                        </p>
+                    </article>
+                </div>
+            </div>
+        </section>
+        <!-- ENFOQUE -->
+        <section id="enfoque" class="py-12 md:py-16">
+            <div class="container mx-auto max-w-7xl px-4">
+                <div class="grid gap-10 md:grid-cols-2 lg:gap-16 items-start">
+                    <!-- Columna izquierda: texto -->
+                    <div>
+                        <p class="text-sm font-semibold text-neutral-500">Enfoque</p>
+                        <h2 class="mt-2 text-4xl sm:text-5xl font-extrabold tracking-tight">
+                            Nuestro Enfoque en la Fundación Ciencia y Justicia
+                        </h2>
+                        <p class="mt-4 text-neutral-700 max-w-2xl">
+                            En la Fundación Ciencia y Justicia, promovemos un enfoque integral que
+                            prioriza la inclusión y la accesibilidad. Nuestro compromiso es generar
+                            un impacto social positivo a través de la innovación y la ética.
+                        </p>
+
+                        <!-- Mini-features -->
+                        <div class="mt-8 grid gap-6 sm:grid-cols-2">
+                            <div>
+                                <h3 class="font-semibold">Inclusión y Accesibilidad</h3>
+                                <p class="mt-2 text-sm text-neutral-700">
+                                    Aseguramos que todos tengan acceso a oportunidades tecnológicas y educativas.
+                                </p>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold">Innovación Social</h3>
+                                <p class="mt-2 text-sm text-neutral-700">
+                                    Desarrollamos soluciones tecnológicas que abordan desafíos sociales
+                                    y mejoran la calidad de vida.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- CTAs -->
+                        <div class="mt-6 flex flex-wrap gap-3">
+                            <a href="#descubre"
+                                class="inline-flex items-center justify-center rounded-full border px-4 py-2 text-sm font-medium hover:bg-neutral-50">
+                                Descubre
+                            </a>
+                            <a href="#unete"
+                                class="group inline-flex items-center gap-1 rounded-full px-2.5 py-2 text-sm font-semibold">
+                                Únete
+                                <svg class="h-4 w-4 transition-transform group-hover:translate-x-0.5"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 5l7 7-7 7" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Columna derecha: imagen -->
+                    <figure class="relative  overflow-hidden bg-neutral-200">
+                        <img src="assets/enfoque.jpg" alt="" srcset="">
+                    </figure>
+                </div>
+            </div>
+        </section>
+
+        <!-- COLABORACIONES / LOGOS -->
+        <section id="partners" class="py-10 md:py-12">
+            <div class="container mx-auto max-w-5xl px-4">
+                <p class="text-center text-sm font-semibold text-neutral-700">
+                    Colaboraciones con las mejores instituciones del mundo
+                </p>
+
+                <!-- Grid 2 filas máx. (wrap) -->
+                <ul class="mt-6 flex flex-wrap items-center justify-center gap-x-12 gap-y-8"
+                    aria-label="Logos de instituciones colaboradoras">
+                    <!-- Repite/edita estos <li> con tus logos -->
+                    <li class="h-7 md:h-8">
+                        <img src="/assets/01infinito-logo.png" alt="01Infinito"
+                            class="h-full w-auto grayscale opacity-80 hover:opacity-100 hover:grayscale-0 transition" />
+                    </li>
+                    <li class="h-7 md:h-8">
+                        <img src="/assets/assetcobyn.jpg" alt="AssetCo"
+                            class="h-full w-auto grayscale opacity-80 hover:opacity-100 hover:grayscale-0 transition" />
+                    </li>
+                    <li class="h-7 md:h-8">
+                        <img src="/assets/01infinito-logo.png" alt="01Infinito"
+                            class="h-full w-auto grayscale opacity-80 hover:opacity-100 hover:grayscale-0 transition" />
+                    </li>
+                    <li class="h-7 md:h-8">
+                        <img src="/assets/assetcobyn.jpg" alt="AssetCo"
+                            class="h-full w-auto grayscale opacity-80 hover:opacity-100 hover:grayscale-0 transition" />
+                    </li>
+                    <li class="h-7 md:h-8">
+                        <img src="/assets/01infinito-logo.png" alt="01Infinito"
+                            class="h-full w-auto grayscale opacity-80 hover:opacity-100 hover:grayscale-0 transition" />
+                    </li>
+                    <li class="h-7 md:h-8">
+                        <img src="/assets/assetcobyn.jpg" alt="AssetCo"
+                            class="h-full w-auto grayscale opacity-80 hover:opacity-100 hover:grayscale-0 transition" />
+                    </li>
+
+                    <!-- Segunda “fila” (el wrap se encarga solo) -->
+                    <li class="h-7 md:h-8">
+                        <img src="/assets/assetcobyn.jpg" alt="AssetCo"
+                            class="h-full w-auto grayscale opacity-80 hover:opacity-100 hover:grayscale-0 transition" />
+                    </li>
+                    <li class="h-7 md:h-8">
+                        <img src="/assets/01infinito-logo.png" alt="01Infinito"
+                            class="h-full w-auto grayscale opacity-80 hover:opacity-100 hover:grayscale-0 transition" />
+                    </li>
+                    <li class="h-7 md:h-8">
+                        <img src="/assets/assetcobyn.jpg" alt="AssetCo"
+                            class="h-full w-auto grayscale opacity-80 hover:opacity-100 hover:grayscale-0 transition" />
+                    </li>
+                    <li class="h-7 md:h-8">
+                        <img src="/assets/01infinito-logo.png" alt="01Infinito"
+                            class="h-full w-auto grayscale opacity-80 hover:opacity-100 hover:grayscale-0 transition" />
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+
+
+    </main>
+
+
+    <!-- ===== Footer ===== -->
+    <footer class="bg-white">
+        <div class="container mx-auto max-w-7xl px-4 pt-12">
+            <!-- Top: 3 columnas -->
+            <div class="grid grid-cols-3 gap-10 md:grid-cols-3">
+                <!-- Columna 1: Logo + contacto + redes -->
+                <div class="md:pr-10">
+                    <a href="/" class="flex items-center gap-3">
+                        <img src="/assets/blanco_background.png" alt="Fundación Ciencia y Justicia" class="h-14 w-auto">
+                        <span class="sr-only">Fundación Ciencia y Justicia</span>
+                    </a>
+
+                    <div class="mt-6 space-y-5 text-sm">
+                        <div>
+                            <div class="font-semibold text-neutral-900">Sede Central</div>
+                            <p class="mt-1 text-neutral-600">
+                                Avenida Del Libertador 1000, Vicente López, Argentina
+                            </p>
+                        </div>
+
+                        <div>
+                            <div class="font-semibold text-neutral-900">Escríbenos</div>
+                            <a href="mailto:email@fundacioncienciayjusticia.org"
+                                class="mt-1 inline-block text-neutral-900 underline decoration-neutral-300 hover:decoration-neutral-700">
+                                contacto@cienciayjusticia.org
+                            </a>
+                        </div>
+
+                        <div class="flex items-center gap-4 pt-2">
+                            <a aria-label="Facebook" href="#" class="text-neutral-700 hover:text-neutral-900">
+                                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M13 10h3l-1 4h-2v8h-4v-8H7v-4h2V8a4 4 0 0 1 4-4h3v4h-3a1 1 0 0 0-1 1v1z" />
+                                </svg>
+                            </a>
+                            <a aria-label="Instagram" href="#" class="text-neutral-700 hover:text-neutral-900">
+                                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm5 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm6-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zM12 9a3 3 0 1 1 0 6 3 3 0 0 1 0-6z" />
+                                </svg>
+                            </a>
+                            <a aria-label="X" href="#" class="text-neutral-700 hover:text-neutral-900">
+                                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M3 3h4.3l4.2 6 4.7-6H21l-7.3 9.2L21 21h-4.3l-4.6-6.4L7 21H3l7.6-9.7z" />
+                                </svg>
+                            </a>
+                            <a aria-label="LinkedIn" href="#" class="text-neutral-700 hover:text-neutral-900">
+                                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M4 3a2 2 0 1 0 0 4 2 2 0 0 0 0-4zM3 8h3.9v13H3zM14.5 8A5.5 5.5 0 0 1 20 13.5V21h-3.9v-6.2c0-1.7-.9-2.8-2.4-2.8s-2.5 1.1-2.5 2.8V21H7.3V8H11v1.9C11.6 9.2 13 8 14.5 8z" />
+                                </svg>
+                            </a>
+                            <a aria-label="YouTube" href="#" class="text-neutral-700 hover:text-neutral-900">
+                                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M23 12s0-3.4-.4-5a3 3 0 0 0-2-2C18.9 4.3 12 4.3 12 4.3s-6.9 0-8.6.7a3 3 0 0 0-2 2C1 8.6 1 12 1 12s0 3.4.4 5a3 3 0 0 0 2 2c1.7.7 8.6.7 8.6.7s6.9 0 8.6-.7a3 3 0 0 0 2-2c.4-1.6.4-5 .4-5zM10 15.5v-7l6 3.5-6 3.5z" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Columna 2 -->
+                <div class="space-y-4 text-sm">
+                    <a href="#" class="block font-semibold text-neutral-900">Sobre la Fundación</a>
+                    <a href="#" class="block hover:underline">Qué hacemos</a>
+                    <a href="#" class="block hover:underline">Proyectos</a>
+                    <a href="#" class="block hover:underline">Únete a la FCJ</a>
+                </div>
+
+                <!-- Columna 3 -->
+                <div class="space-y-4 text-sm">
+                    <a href="#" class="block font-semibold text-neutral-900">Noticias</a>
+                    <a href="#" class="block hover:underline">Recursos y Herramientas</a>
+                    <a href="#" class="block hover:underline">Eventos</a>
+                </div>
+            </div>
+
+            <!-- Subfooter (fuera del grid) -->
+            <div class="mt-10 border-t pt-6 pb-12">
+                <div
+                    class="flex flex-col gap-4 text-sm text-neutral-600 md:flex-row md:items-center md:justify-between">
+                    <p>© 2025 Fundación Ciencia y Justicia. Todos los derechos reservados.</p>
+
+                </div>
+            </div>
+    </footer>
+</body>
+
+</html>

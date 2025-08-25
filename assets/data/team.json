@@ -3,7 +3,7 @@
     "name": "Sebastián Cecconi",
     "role": "Presidente",
     "bio": "Lidera la estrategia y gestión de proyectos innovadores en la Fundación.",
-    "photo": "/people/sebastian.jpg",
+    "photo": "/assets/sebastian.jpg",
     "links": {
       "linkedin": "https://www.linkedin.com/in/usuario",
       "x": "https://x.com/usuario",
@@ -14,7 +14,7 @@
     "name": "Luis Gómez",
     "role": "Coordinador Técnico",
     "bio": "Desarrolla soluciones tecnológicas para mejorar la inclusión y la seguridad ciudadana.",
-    "photo": "/people/luis.jpg",
+    "photo": "/assets/luis.jpg",
     "links": {
       "linkedin": "https://www.linkedin.com/in/usuario",
       "x": "https://x.com/usuario"
@@ -24,7 +24,7 @@
     "name": "María López",
     "role": "Gestora de Proyectos",
     "bio": "Coordina iniciativas de capacitación y educación en tecnologías emergentes.",
-    "photo": "/people/maria.jpg",
+    "photo": "/assets/maria.jpg",
     "links": {
       "linkedin": "https://www.linkedin.com/in/usuario"
     }
@@ -33,7 +33,7 @@
     "name": "Carlos Ruiz",
     "role": "Analista de Datos",
     "bio": "Analiza datos para optimizar nuestros programas y evaluar su impacto social.",
-    "photo": "/people/carlos.jpg",
+    "photo": "/assets/carlos.jpg",
     "links": {
       "linkedin": "https://www.linkedin.com/in/usuario",
       "site": "https://portfolio.com"
