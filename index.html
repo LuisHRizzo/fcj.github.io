@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Fundación Ciencia y Justicia</title>
+    <meta name="description"
+        content="Innovación tecnológica al servicio de las personas: IA, IoT, ciberseguridad y educación digital." />
+
+    <link rel="icon" type="image/png" sizes="32x41" href="/assets/favicon32.png">
+    <link rel="icon" type="image/png" sizes="16x20" href="/assets/favicon16.png">
+    
+
+    <!-- Tailwind (CDN) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f5f8ff', 100: '#eaf0ff', 200: '#cddbff', 300: '#aac0ff',
+                            400: '#7b9cff', 500: '#4f79ff', 600: '#355be6', 700: '#2a46b3',
+                            800: '#22388c', 900: '#1d2f73',
+                        },
+                    },
+                    fontFamily: {
+                        heading: ['Jost', 'Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+                        sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif']
+                    },
+                    container: { center: true, padding: '1rem' },
+                    keyframes: {
+                        marquee: { '0%': { transform: 'translateX(0)' }, '100%': { transform: 'translateX(-50%)' } }
+                    },
+                    animation: { marquee: 'marquee 30s linear infinite' }
+                }
+            }
+        }
+    </script>
+
+    <!-- Componentes reutilizables -->
+    <style type="text/tailwindcss">
+        @layer components {
+      .btn { @apply inline-flex items-center justify-center rounded-full px-5 py-2.5 text-sm font-semibold transition; }
+      .btn-primary { @apply bg-brand-600 text-white hover:bg-brand-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-600; }
+      .btn-outline { @apply border text-neutral-900 hover:bg-neutral-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-400; }
+      .link-arrow { @apply inline-flex items-center gap-2 text-sm font-semibold; }
+      .card { @apply rounded-2xl border bg-white shadow-sm transition hover:shadow-md; }
+      .icon-box { @apply h-10 w-10 shrink-0 rounded-xl border flex items-center justify-center; }
+    }
+  </style>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- JS global (defer) -->
+    <script src="/assets/site.js" defer></script>
+</head>
+
+<body class="min-h-dvh bg-white text-neutral-900 antialiased">
+    <!-- ===== Navbar ===== -->
+    <header class="border-b bg-white">
+        <div class="container mx-auto max-w-7xl px-4">
+            <div class="flex h-16 items-center justify-between">
+                <!-- Logo -->
+                <a href="/" class="flex items-center gap-3 shrink-0">
+                    <img src="/assets/fcj-logo.svg" alt="Fundación Ciencia y Justicia" class="h-9 w-auto" />
+                    <span class="hidden sm:block leading-tight">
+                        <span class="block text-xs tracking-wider">FUNDACIÓN</span>
+                        <span class="block -mt-0.5 text-xs tracking-wider">CIENCIA Y</span>
+                        <span class="block -mt-0.5 text-xs tracking-wider">JUSTICIA</span>
+                    </span>
+                </a>
+
+                <!-- Desktop nav -->
+                <nav class="hidden md:flex items-center gap-8" aria-label="Principal">
+                    <a href="#" class="text-sm text-neutral-800 hover:text-neutral-950">Home</a>
+                    <a href="/about.html" class="text-sm text-neutral-800 hover:text-neutral-950">Quienes somos</a>
+                    <a href="/work.html" class="text-sm text-neutral-800 hover:text-neutral-950">Qué hacemos</a>
+                    <a href="/solutions.html" class="text-sm text-neutral-800 hover:text-neutral-950">Soluciones y Proyectos</a>
+
+                    <!-- Dropdown -->
+                    <div class="relative">
+                        <button id="resourcesBtn"
+                            class="flex items-center gap-1 text-sm text-neutral-800 hover:text-neutral-950"
+                            aria-haspopup="true" aria-expanded="false" aria-controls="resourcesMenu">
+                            Más recursos
+                            <svg class="h-4 w-4 transition-transform" viewBox="0 0 20 20" fill="currentColor"
+                                aria-hidden="true">
+                                <path fill-rule="evenodd"
+                                    d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.25 8.29a.75.75 0 01-.02-1.08z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        </button>
+                        <div id="resourcesMenu"
+                            class="invisible absolute left-0 top-full z-20 mt-2 w-56 translate-y-1 rounded-xl border bg-white p-2 opacity-0 shadow-lg transition data-[open=true]:visible data-[open=true]:translate-y-0 data-[open=true]:opacity-100"
+                            role="menu" aria-labelledby="resourcesBtn">
+                            <a href="#"
+                                class="block rounded-lg px-3 py-2 text-sm text-neutral-700 hover:bg-neutral-50">Blog</a>
+                            <a href="#"
+                                class="block rounded-lg px-3 py-2 text-sm text-neutral-700 hover:bg-neutral-50">Publicaciones</a>
+                            <a href="#"
+                                class="block rounded-lg px-3 py-2 text-sm text-neutral-700 hover:bg-neutral-50">Material
+                                educativo</a>
+                        </div>
+                    </div>
+                </nav>
+
+                <!-- Actions (desktop) -->
+                <div class="hidden md:flex items-center gap-3">
+                    <a href="#" class="btn btn-outline">Involucrate</a>
+                    <a href="#" class="btn btn-primary">Contactanos</a>
+                </div>
+
+                <!-- Mobile toggle -->
+                <button id="mobileToggle"
+                    class="md:hidden inline-flex h-10 w-10 items-center justify-center rounded-lg border"
+                    aria-label="Abrir menú" aria-controls="mobileMenu" aria-expanded="false">
+                    <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile menu -->
+        <div id="mobileMenu" class="md:hidden hidden border-t">
+            <div class="container mx-auto max-w-7xl px-4 py-3">
+                <nav class="flex flex-col gap-2">
+                    <a href="#" class="rounded-lg px-3 py-2 text-sm hover:bg-neutral-50">Home</a>
+                    <a href="#" class="rounded-lg px-3 py-2 text-sm hover:bg-neutral-50">Qué hacemos</a>
+                    <a href="#" class="rounded-lg px-3 py-2 text-sm hover:bg-neutral-50">Soluciones y Proyectos</a>
+
+                    <details class="rounded-lg px-3 py-2 text-sm open:bg-neutral-50">
+                        <summary class="cursor-pointer list-none">Más recursos</summary>
+                        <div class="mt-2 ml-2 flex flex-col gap-1">
+                            <a href="#" class="rounded px-2 py-1 hover:bg-neutral-100">Blog</a>
+                            <a href="#" class="rounded px-2 py-1 hover:bg-neutral-100">Publicaciones</a>
+                            <a href="#" class="rounded px-2 py-1 hover:bg-neutral-100">Material educativo</a>
+                        </div>
+                    </details>
+
+                    <div class="mt-2 flex items-center gap-2">
+                        <a href="#" class="btn btn-outline flex-1">Involucrate</a>
+                        <a href="#" class="btn btn-primary flex-1">Contactanos</a>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- ===== Hero ===== -->
+        <section class="py-10 md:py-16">
+            <div class="container mx-auto max-w-7xl px-4">
+                <div class="rounded-3xl border bg-white shadow-sm overflow-hidden">
+                    <div class="grid md:grid-cols-2">
+                        <!-- Left -->
+                        <div class="p-8 sm:p-12 lg:p-16">
+                            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.08]">
+                                Innovación tecnológica al servicio de las personas
+                            </h1>
+                            <p class="mt-6 text-neutral-600 text-base sm:text-lg leading-relaxed max-w-xl">
+                                Diseñamos herramientas, proyectos y experiencias educativas para impulsar la inclusión,
+                                el desarrollo humano y la transparencia pública mediante el uso de tecnología avanzada.
+                            </p>
+                            <div class="mt-8 flex flex-wrap gap-3">
+                                <a href="#explora" class="btn btn-outline">Explora</a>
+                                <a href="#contacto" class="btn btn-primary">Contactanos</a>
+                            </div>
+                        </div>
+
+                        <!-- Right (media) -->
+                        <div class="relative bg-neutral-600">
+                            <!-- Mantiene proporción en mobile -->
+                            <div class="aspect-[16/11] md:aspect-auto md:h-full"></div>
+
+                            <!-- Video embebido -->
+                            <video id="heroVideo" class="absolute inset-0 h-full w-full object-cover" autoplay muted
+                                loop playsinline preload="metadata" poster="/assets/hero-poster.jpg">
+                                <source src="/assets/hero-video.webm" type="video/webm" />
+                                <source src="/assets/hero-video.mp4" type="video/mp4" />
+                                <!-- Fallback -->
+                                Tu navegador no soporta video HTML5.
+                            </video>
+
+                            <!-- Botón overlay (se oculta cuando el video está reproduciendo) -->
+                            <button id="heroPlay"
+                                class="absolute inset-0 m-auto grid h-16 w-16 place-items-center rounded-full bg-white/95 shadow"
+                                aria-label="Reproducir video">
+                                <svg viewBox="0 0 24 24" class="h-6 w-6" aria-hidden="true">
+                                    <path d="M8 5v14l11-7z" fill="currentColor" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== Logos marquee ===== -->
+        <section class="py-10">
+            <div class="container mx-auto max-w-7xl px-4">
+                <p class="text-center text-sm font-semibold text-neutral-800">
+                    Potenciando juntos el impacto social y tecnológico.
+                </p>
+
+                <div class="relative mt-6 overflow-hidden">
+                    <div
+                        class="pointer-events-none absolute left-0 top-0 h-full w-16 bg-gradient-to-r from-white to-transparent">
+                    </div>
+                    <div
+                        class="pointer-events-none absolute right-0 top-0 h-full w-16 bg-gradient-to-l from-white to-transparent">
+                    </div>
+
+                    <div class="flex w-max animate-marquee items-center gap-16 motion-reduce:animate-none">
+                        <!-- tanda 1 -->
+                        <img src="/assets/01infinito-logo.png" alt="01Infinito" loading="lazy"
+                            class="h-8 md:h-9 w-auto" />
+                        <img src="/assets/assetcobyn.jpg" alt="AssetCo" loading="lazy" class="h-12 md:h-14 w-auto" />
+                        <img src="/assets/01infinito-logo.png" alt="01Infinito" loading="lazy"
+                            class="h-8 md:h-9 w-auto" />
+                        <img src="/assets/assetcobyn.jpg" alt="AssetCo" loading="lazy" class="h-12 md:h-14 w-auto" />
+                        <img src="/assets/01infinito-logo.png" alt="01Infinito" loading="lazy"
+                            class="h-8 md:h-9 w-auto" />
+                        <img src="/assets/assetcobyn.jpg" alt="AssetCo" loading="lazy" class="h-12 md:h-14 w-auto" />
+                        <!-- tanda 2 (duplicada) -->
+                        <img src="/assets/01infinito-logo.png" alt="" aria-hidden="true" loading="lazy"
+                            class="h-8 md:h-9 w-auto" />
+                        <img src="/assets/assetcobyn.jpg" alt="" aria-hidden="true" loading="lazy"
+                            class="h-8 md:h-9 w-auto" />
+                        <img src="/assets/01infinito-logo.png" alt="" aria-hidden="true" loading="lazy"
+                            class="h-8 md:h-9 w-auto" />
+                        <img src="/assets/assetcobyn.jpg alt=" aria-hidden=" true" loading="lazy"
+                            class="h-8 md:h-9 w-auto" />
+                        <img src="/assets/01infinito-logo.png" alt="" aria-hidden="true" loading="lazy"
+                            class="h-8 md:h-9 w-auto" />
+                        <img src="/assets/assetcobyn.jpg" alt="" aria-hidden="true" loading="lazy"
+                            class="h-8 md:h-9 w-auto" />
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== Servicios ===== -->
+        <section id="servicios" class="py-12 md:py-16">
+            <div class="container mx-auto max-w-7xl px-4">
+                <p class="text-sm font-semibold text-neutral-500">Servicios</p>
+                <h2 class="mt-2 text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight max-w-4xl">
+                    Nuestras Soluciones para la inclusión tecnológica
+                </h2>
+                <p class="mt-5 max-w-3xl text-neutral-600">
+                    Ofrecemos consultoría y soluciones innovadoras para gobiernos y ONGs. Nuestra experiencia en IA, IoT
+                    y ciberseguridad transforma realidades y promueve el desarrollo inclusivo.
+                </p>
+
+                <div class="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+                    <article class="group card p-5">
+                        <div class="rounded-xl bg-neutral-200 aspect-[16/10] flex items-center justify-center">
+                            <img src="/assets/consultoria.png" alt="">
+                        </div>
+                        <h3 class="mt-6 text-2xl font-bold leading-tight">Consultoría y Soluciones Especializadas</h3>
+                        <p class="mt-3 text-sm text-neutral-600">Impulsamos la transformación digital en el sector
+                            público.</p>
+                    </article>
+
+                    <article class="group card p-5">
+                        <div class="rounded-xl bg-neutral-200 aspect-[16/10] flex items-center justify-center">
+                            <img src="/assets/seguridad-digital.png" alt="">
+                        </div>
+                        <h3 class="mt-6 text-2xl font-bold leading-tight">Innovación y Seguridad en el Entorno Digital
+                        </h3>
+                        <p class="mt-3 text-sm text-neutral-600">Desarrollamos soluciones de ciberseguridad para
+                            proteger a las comunidades.</p>
+                    </article>
+
+                    <article class="group card p-5">
+                        <div class="rounded-xl bg-neutral-200 aspect-[16/10] flex items-center justify-center">
+                            <img src="/assets/conexion.png" alt="">
+                        </div>
+                        <h3 class="mt-6 text-2xl font-bold leading-tight">Plataformas Ciudadanas para la Participación
+                            Activa</h3>
+                        <p class="mt-3 text-sm text-neutral-600">Creamos herramientas digitales que fomentan la
+                            transparencia y la colaboración.</p>
+                    </article>
+                </div>
+
+                <div class="mt-10 flex flex-wrap gap-3">
+                    <a href="#mas" class="btn btn-outline">Conocer más</a>
+                    <a href="#asesoramiento" class="link-arrow">
+                        Solicitar asesoramiento
+                        <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== Soluciones (alto impacto) ===== -->
+        <section id="soluciones" class="py-12 md:py-16">
+            <div class="container mx-auto max-w-7xl px-4">
+                <div class="grid gap-10 md:grid-cols-2 lg:gap-16">
+                    <div>
+                        <p class="text-sm font-semibold text-neutral-500">Soluciones con alto impacto</p>
+                        <h2
+                            class="mt-2 text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight max-w-2xl">
+                            Músculo tecnológico al servicio del sector público y la sociedad civil
+                        </h2>
+                        <p class="mt-5 max-w-xl text-neutral-600">
+                            Implementamos soluciones de IA, IoT, blockchain y Ciberseguridad para promover la
+                            transparencia pública y la seguridad ciudadana. Nuestro enfoque integral busca desarrollar
+                            comunidades seguras y empoderadas.
+                        </p>
+
+                        <div class="mt-8 flex flex-wrap gap-3">
+                            <a href="#explorar" class="btn btn-outline">Explora</a>
+                            <a href="#consultar" class="link-arrow group">
+                                Consultar
+                                <svg class="h-4 w-4 transition-transform group-hover:translate-x-0.5"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 5l7 7-7 7" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="grid gap-5">
+                        <article tabindex="0"
+                            class="group card p-6 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-300">
+                            <div class="flex items-start gap-4">
+                                <div class="icon-box">
+                                    <svg class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                        <path
+                                            d="M12 3a7 7 0 0 0-7 7v1a4 4 0 0 0 0 8h2a2 2 0 0 0 2 2h2a3 3 0 0 0 3-3v-1h1a4 4 0 0 0 0-8 5 5 0 0 0-3-6z" />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-bold">Inteligencia Artificial</h3>
+                                    <p class="mt-2 text-sm text-neutral-600">Transformando capacidades del sector
+                                        público y empoderando a la sociedad civil.</p>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article tabindex="0"
+                            class="group card p-6 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-300">
+                            <div class="flex items-start gap-4">
+                                <div class="icon-box">
+                                    <svg class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                        <path d="M12 2 4 5v6c0 5 3.4 9.4 8 11 4.6-1.6 8-6 8-11V5l-8-3z" />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-bold">Ciberseguridad</h3>
+                                    <p class="mt-2 text-sm text-neutral-600">Un escudo que protege derechos y fortalece
+                                        la confianza ciudadana.</p>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article tabindex="0"
+                            class="group card p-6 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-300">
+                            <div class="flex items-start gap-4">
+                                <div class="icon-box">
+                                    <svg class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                        <path
+                                            d="M12 7a5 5 0 1 1 0 10A5 5 0 0 1 12 7zm0-5a10 10 0 0 1 10 10h-3a7 7 0 1 0-14 0H2A10 10 0 0 1 12 2z" />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-bold">IoT Internet de las Cosas</h3>
+                                    <p class="mt-2 text-sm text-neutral-600">Conectando soluciones inteligentes para
+                                        mejorar la calidad de vida.</p>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article tabindex="0"
+                            class="group card p-6 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-300">
+                            <div class="flex items-start gap-4">
+                                <div class="icon-box">
+                                    <svg class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                        <path d="M7 2h10v6H7zM3 9h10v6H3zM14 9h7v6h-7zM7 16h10v6H7z" />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-bold">Blockchain</h3>
+                                    <p class="mt-2 text-sm text-neutral-600">Transparencia que se convierte en confianza
+                                        y participación.</p>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== Impacto ===== -->
+        <section id="impacto" class="py-12 md:py-16">
+            <div class="container mx-auto max-w-7xl px-4">
+                <div class="grid items-start gap-10 md:grid-cols-2 lg:gap-16">
+                    <div>
+                        <p class="text-sm font-semibold text-neutral-500">Impacto</p>
+                        <h2
+                            class="mt-2 max-w-2xl text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight tracking-tight">
+                            Proyectos que transforman comunidades y vidas
+                        </h2>
+                        <p class="mt-5 max-w-xl text-neutral-600">
+                            Descubre cómo nuestras iniciativas están cambiando la realidad. Desde alertas comunitarias
+                            hasta aplicaciones de transparencia, cada proyecto tiene un impacto significativo.
+                        </p>
+
+                        <div class="mt-8 grid gap-6 sm:grid-cols-2">
+                            <div class="card p-5">
+                                <div class="flex items-start gap-4">
+                                    <div class="icon-box">
+                                        <svg class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                            <path
+                                                d="M11 4a7 7 0 1 1 0 14 7 7 0 0 1 0-14Zm8.3 14.9-3.6-3.6a9 9 0 1 0-1.4 1.4l3.6 3.6a1 1 0 0 0 1.4-1.4Z" />
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-lg font-semibold">Proyectos Destacados</h3>
+                                        <p class="mt-2 text-sm text-neutral-600">Plataforma de alertas comunitarias, app
+                                            de transparencia y formación en ciberseguridad.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card p-5">
+                                <div class="flex items-start gap-4">
+                                    <div class="icon-box">
+                                        <svg class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                            <path
+                                                d="M12 2a10 10 0 1 0 .001 20.001A10 10 0 0 0 12 2Zm1 5h-2v6l5 3 1-1.7-4-2.3V7Z" />
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-lg font-semibold">Más Proyectos</h3>
+                                        <p class="mt-2 text-sm text-neutral-600">Explora nuestros proyectos en curso y
+                                            finalizados que marcan la diferencia.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-8 flex flex-wrap items-center gap-3">
+                            <a href="#ver-mas" class="btn btn-outline">Ver más</a>
+                            <a href="#detalles" class="link-arrow group">
+                                Detalles
+                                <svg class="h-4 w-4 transition-transform group-hover:translate-x-0.5"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 5l7 7-7 7" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="relative">
+                        <div class="aspect-[4/3] rounded-2xl ">
+                            <img src="assets/proyectos.gif" alt="" srcset="">
+                            
+                        </div>
+                        <!-- <img src="/media/proyectos.jpg" alt="Proyectos en acción" class="h-full w-full rounded-2xl border object-cover" loading="lazy" /> -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== Capacitacion ===== -->
+        <section id="capacitacion" class="py-12 md:py-16">
+            <div class="container mx-auto max-w-7xl px-4">
+                <div class="grid gap-6 md:grid-cols-2 lg:gap-16">
+                    <div>
+                        <p class="text-sm font-semibold text-neutral-500">Capacitación</p>
+                        <h2
+                            class="mt-2 max-w-2xl text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight tracking-tight">
+                            Transforma tu futuro con nuestras formaciones
+                        </h2>
+                    </div>
+                    <p class="text-neutral-600 max-w-xl">
+                        En FCS, capacitamos a líderes digitales que impactan sus comunidades. Nuestros programas están
+                        diseñados para brindar herramientas prácticas en IA, ciberseguridad y educación digital. Únete a
+                        nosotros y sé parte del cambio.
+                    </p>
+                </div>
+
+                <div class="mt-10 grid gap-10 md:grid-cols-3">
+                    <article>
+                        <div class="icon-box">
+                            <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="9"></circle>
+                                <path d="m14.5 9.5-3.8 1.5-1.2 3.8 3.8-1.5z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="mt-5 text-2xl font-extrabold leading-tight">Cursos recientes disponibles para ti</h3>
+                        <p class="mt-2 text-sm text-neutral-600">Explora nuestros cursos y comienza tu viaje.</p>
+                    </article>
+
+                    <article>
+                        <div class="icon-box">
+                            <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="4" y="10" width="3" height="8"></rect>
+                                <rect x="10.5" y="6" width="3" height="12"></rect>
+                                <rect x="17" y="12" width="3" height="6"></rect>
+                                <rect x="3" y="4" width="6" height="3" rx="1"></rect>
+                            </svg>
+                        </div>
+                        <h3 class="mt-5 text-2xl font-extrabold leading-tight">Aprende sobre IA y ciberseguridad</h3>
+                        <p class="mt-2 text-sm text-neutral-600">Desarrolla habilidades que transforman realidades.</p>
+                    </article>
+
+                    <article>
+                        <div class="icon-box">
+                            <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M10.5 13.5 8 16a4 4 0 1 1-5.7-5.7l2.5-2.5a4 4 0 0 1 5.7 0"></path>
+                                <path d="M13.5 10.5 16 8a4 4 0 0 1 5.7 5.7l-2.5 2.5a4 4 0 0 1-5.7 0"></path>
+                            </svg>
+                        </div>
+                        <h3 class="mt-5 text-2xl font-extrabold leading-tight">Conviértete en un líder digital hoy</h3>
+                        <p class="mt-2 text-sm text-neutral-600">Inscríbete y comienza a aprender ahora.</p>
+                    </article>
+                </div>
+
+                <div class="mt-10 flex flex-wrap gap-3">
+                    <a href="#formacion" class="btn btn-outline">Formación</a>
+                    <a href="#inscripcion" class="link-arrow group">
+                        Inscríbete
+                        <svg class="h-4 w-4 transition-transform group-hover:translate-x-0.5" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== Involucrate ===== -->
+        <section id="involucrate" class="py-12 md:py-16">
+            <div class="container mx-auto max-w-7xl px-4">
+                <div class="grid gap-10 md:grid-cols-2 lg:gap-16 items-start">
+                    <div>
+                        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight tracking-tight">
+                            ¿Quieres colaborar o saber más?
+                        </h2>
+                        <p class="mt-4 text-neutral-600">Estamos aquí para ayudarte y responder tus preguntas.</p>
+                    </div>
+
+                    <form action="#" method="post" class="w-full md:justify-self-end max-w-xl">
+                        <label for="email" class="sr-only">Correo electrónico</label>
+                        <div class="flex items-center gap-3">
+                            <input id="email" name="email" type="email" required placeholder="Ingresa tu correo"
+                                class="peer w-full bg-transparent border-0 border-b border-neutral-300 focus:border-brand-600 focus:outline-none py-2 text-sm placeholder:text-neutral-400" />
+                            <button type="submit" class="btn btn-primary shrink-0">Hablemos</button>
+                        </div>
+                        <p class="mt-2 text-xs text-neutral-500">
+                            Al hacer clic en Hablemos, aceptas nuestros
+                            <a href="/terminos"
+                                class="underline decoration-neutral-300 hover:decoration-neutral-600">Términos y
+                                Condiciones</a>.
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== Testimonios (carrusel) ===== -->
+        <section id="testimonios" class="w-full py-16 md:py-20 bg-white">
+            <div id="testimonialCarousel" class="relative min-h-[320px] md:min-h-[360px]">
+                <!-- Slide 1 -->
+                <article data-testimonial-slide
+                    class="absolute inset-0 opacity-100 transition-opacity duration-700 ease-linear flex items-center justify-center">
+                    <div class="container mx-auto max-w-3xl px-4 text-center">
+                        <div class="flex items-center justify-center gap-2 text-sm font-semibold text-neutral-800">
+                            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <path d="M4 4h16v6H4zM4 14h10v6H4zM16 14h4v6h-4z" />
+                            </svg>
+                            <span>AssetCo</span>
+                        </div>
+                        <figure class="mt-5">
+                            <blockquote class="text-xl sm:text-2xl md:text-3xl font-extrabold leading-relaxed">
+                                “La alfabetización digital es justicia social: reduce brechas y multiplica
+                                oportunidades.”
+                            </blockquote>
+                            <figcaption class="mt-6 flex flex-col items-center gap-3 text-sm">
+                                <div class="h-20 w-20 rounded-full bg-neutral-300/80 flex items-center justify-center">
+                                    <img src="/assets/pablo.png" alt="Pablo Giuliano" loading="lazy"
+                                        class="h-20 w-20 rounded-full object-cover ring-2 ring-white shadow"
+                                        onerror="this.classList.add('hidden')">
+                                </div>
+                                <div>
+                                    <div class="font-semibold">Pablo Giuliano</div>
+                                    <div class="text-neutral-500">Coordinador de operaciones, AssetCo</div>
+                                </div>
+                            </figcaption>
+                        </figure>
+                    </div>
+                </article>
+
+                <!-- Slide 2 -->
+                <article data-testimonial-slide
+                    class="absolute inset-0 opacity-0 transition-opacity duration-700 ease-linear flex items-center justify-center pointer-events-none">
+                    <div class="container mx-auto max-w-3xl px-4 text-center">
+                        <div class="flex items-center justify-center gap-2 text-sm font-semibold text-neutral-800">
+                            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M4 4h16v6H4zM4 14h10v6H4zM16 14h4v6h-4z" />
+                            </svg>
+                            <span>Vicente Lopez</span>
+                        </div>
+                        <figure class="mt-5">
+                            <blockquote class="text-xl sm:text-2xl md:text-3xl font-extrabold leading-relaxed">
+                                “Las alianzas público-civiles basadas en datos abren caminos reales a la participación
+                                ciudadana.”
+                            </blockquote>
+                            <figcaption class="mt-6 flex flex-col items-center gap-3 text-sm">
+                                <div class="h-20 w-20 rounded-full bg-neutral-300/80 flex items-center justify-center">
+                                    <img src="/assets/Gabriel.jpg" alt="Gabriel Neumann" loading="lazy"
+                                        class="h-20 w-20 rounded-full object-cover ring-2 ring-white shadow"
+                                        onerror="this.classList.add('hidden')">
+                                </div>
+                                <div>
+                                    <div class="font-semibold">Gabriel Neumann</div>
+                                    <div class="text-neutral-500">General Manager de IT, Municipio de Vicente López</div>
+                                </div>
+                            </figcaption>
+                        </figure>
+                    </div>
+                </article>
+
+                <!-- Slide 3 -->
+                <article data-testimonial-slide
+                    class="absolute inset-0 opacity-0 transition-opacity duration-700 ease-linear flex items-center justify-center pointer-events-none">
+                    <div class="container mx-auto max-w-3xl px-4 text-center">
+                        <div class="flex items-center justify-center gap-2 text-sm font-semibold text-neutral-800">
+                            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M4 4h16v6H4zM4 14h10v6H4zM16 14h4v6h-4z" />
+                            </svg>
+                            <span>EMEGE</span>
+                        </div>
+                        <figure class="mt-5">
+                            <blockquote class="text-xl sm:text-2xl md:text-3xl font-extrabold leading-relaxed">
+                                “La colaboración entre tecnología y comunidad es la clave para un futuro inclusivo y
+                                seguro.”
+                            </blockquote>
+                            <figcaption class="mt-6 flex flex-col items-center gap-3 text-sm">
+                                <div class="h-20 w-20 rounded-full bg-neutral-300/80 flex items-center justify-center">
+                                    <img src="/assets/marcelo.png" alt="Marcelo Gonzalez" loading="lazy"
+                                        class="h-20 w-20 rounded-full object-cover ring-2 ring-white shadow"
+                                        onerror="this.classList.add('hidden')">
+                                </div>
+                                <div>
+                                    <div class="font-semibold">Marcelo Gonzalez</div>
+                                    <div class="text-neutral-500">Dueño de EMEGE GROUP S.A.</div>
+                                </div>
+                            </figcaption>
+                        </figure>
+                    </div>
+                </article>
+
+                <!-- Slide 4 -->
+                <article data-testimonial-slide
+                    class="absolute inset-0 opacity-0 transition-opacity duration-700 ease-linear flex items-center justify-center pointer-events-none">
+                    <div class="container mx-auto max-w-3xl px-4 text-center">
+                        <div class="flex items-center justify-center gap-2 text-sm font-semibold text-neutral-800">
+                            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M4 4h16v6H4zM4 14h10v6H4zM16 14h4v6h-4z" />
+                            </svg>
+                            <span>GoB</span>
+                        </div>
+                        <figure class="mt-5">
+                            <blockquote class="text-xl sm:text-2xl md:text-3xl font-extrabold leading-relaxed">
+                                “La transparencia con tecnología cercana genera confianza y comunidad.”
+                            </blockquote>
+                            <figcaption class="mt-6 flex flex-col items-center gap-3 text-sm">
+                                <div class="h-20 w-20 rounded-full bg-neutral-300/80 flex items-center justify-center">
+                                    <img src="/assets/alan.jpg" alt="Alan Cura" loading="lazy"
+                                        class="h-20 w-20 rounded-full object-cover ring-2 ring-white shadow"
+                                        onerror="this.classList.add('hidden')">
+                                </div>
+                                <div>
+                                    <div class="font-semibold">Alan Cura</div>
+                                    <div class="text-neutral-500">CEO, Guardians of the Ball</div>
+                                </div>
+                            </figcaption>
+                        </figure>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <!-- ===== Footer ===== -->
+    <footer class="bg-white">
+        <div class="container mx-auto max-w-7xl px-4 pt-12">
+            <!-- Top: 3 columnas -->
+            <div class="grid grid-cols-3 gap-10 md:grid-cols-3">
+                <!-- Columna 1: Logo + contacto + redes -->
+                <div class="md:pr-10">
+                    <a href="/" class="flex items-center gap-3">
+                        <img src="/assets/blanco_background.png" alt="Fundación Ciencia y Justicia" class="h-14 w-auto">
+                        <span class="sr-only">Fundación Ciencia y Justicia</span>
+                    </a>
+
+                    <div class="mt-6 space-y-5 text-sm">
+                        <div>
+                            <div class="font-semibold text-neutral-900">Sede Central</div>
+                            <p class="mt-1 text-neutral-600">
+                                Avenida Del Libertador 1000, Vicente López, Argentina
+                            </p>
+                        </div>
+
+                        <div>
+                            <div class="font-semibold text-neutral-900">Escríbenos</div>
+                            <a href="mailto:email@fundacioncienciayjusticia.org"
+                                class="mt-1 inline-block text-neutral-900 underline decoration-neutral-300 hover:decoration-neutral-700">
+                                contacto@cienciayjusticia.org
+                            </a>
+                        </div>
+
+                        <div class="flex items-center gap-4 pt-2">
+                            <a aria-label="Facebook" href="#" class="text-neutral-700 hover:text-neutral-900">
+                                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M13 10h3l-1 4h-2v8h-4v-8H7v-4h2V8a4 4 0 0 1 4-4h3v4h-3a1 1 0 0 0-1 1v1z" />
+                                </svg>
+                            </a>
+                            <a aria-label="Instagram" href="#" class="text-neutral-700 hover:text-neutral-900">
+                                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm5 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm6-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zM12 9a3 3 0 1 1 0 6 3 3 0 0 1 0-6z" />
+                                </svg>
+                            </a>
+                            <a aria-label="X" href="#" class="text-neutral-700 hover:text-neutral-900">
+                                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M3 3h4.3l4.2 6 4.7-6H21l-7.3 9.2L21 21h-4.3l-4.6-6.4L7 21H3l7.6-9.7z" />
+                                </svg>
+                            </a>
+                            <a aria-label="LinkedIn" href="#" class="text-neutral-700 hover:text-neutral-900">
+                                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M4 3a2 2 0 1 0 0 4 2 2 0 0 0 0-4zM3 8h3.9v13H3zM14.5 8A5.5 5.5 0 0 1 20 13.5V21h-3.9v-6.2c0-1.7-.9-2.8-2.4-2.8s-2.5 1.1-2.5 2.8V21H7.3V8H11v1.9C11.6 9.2 13 8 14.5 8z" />
+                                </svg>
+                            </a>
+                            <a aria-label="YouTube" href="#" class="text-neutral-700 hover:text-neutral-900">
+                                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M23 12s0-3.4-.4-5a3 3 0 0 0-2-2C18.9 4.3 12 4.3 12 4.3s-6.9 0-8.6.7a3 3 0 0 0-2 2C1 8.6 1 12 1 12s0 3.4.4 5a3 3 0 0 0 2 2c1.7.7 8.6.7 8.6.7s6.9 0 8.6-.7a3 3 0 0 0 2-2c.4-1.6.4-5 .4-5zM10 15.5v-7l6 3.5-6 3.5z" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                    <!-- Columna 2 -->
+                    <div class="space-y-4 text-sm">
+                        <a href="#" class="block font-semibold text-neutral-900">Sobre la Fundación</a>
+                        <a href="#" class="block hover:underline">Qué hacemos</a>
+                        <a href="#" class="block hover:underline">Proyectos</a>
+                        <a href="#" class="block hover:underline">Únete a la FCJ</a>
+                    </div>
+
+                    <!-- Columna 3 -->
+                    <div class="space-y-4 text-sm">
+                        <a href="#" class="block font-semibold text-neutral-900">Noticias</a>
+                        <a href="#" class="block hover:underline">Recursos y Herramientas</a>
+                        <a href="#" class="block hover:underline">Eventos</a>
+                    </div>
+            </div>
+
+                <!-- Subfooter (fuera del grid) -->
+                <div class="mt-10 border-t pt-6 pb-12">
+                    <div
+                        class="flex flex-col gap-4 text-sm text-neutral-600 md:flex-row md:items-center md:justify-between">
+                        <p>© 2025 Fundación Ciencia y Justicia. Todos los derechos reservados.</p>
+
+                    </div>
+                </div>
+    </footer>
+
+</body>
+
+</html>
