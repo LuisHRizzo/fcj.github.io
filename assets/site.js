@@ -197,6 +197,92 @@
   });
 })();
 
+// Contacto (Formspree)
+(function () {
+  const form = document.getElementById("contactForm");
+  if (!form) return;
+
+  const nameInput = document.getElementById("contactName");
+  const emailInput = document.getElementById("contactEmail");
+  const messageInput = document.getElementById("contactMessage");
+  const terms = document.getElementById("contactTerms");
+  const msg = document.getElementById("contactMsg");
+  const btn = document.getElementById("contactBtn");
+
+  const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    // honeypot
+    const isBot = form.querySelector('input[name="company"]').value !== "";
+    if (isBot) return;
+
+    // validaciones
+    const name = nameInput.value.trim();
+    const email = emailInput.value.trim();
+    const message = messageInput.value.trim();
+
+    if (name.length < 2) {
+      msg.textContent = "Ingresá tu nombre.";
+      msg.className = "mt-3 text-xs text-red-600";
+      nameInput.focus();
+      return;
+    }
+    if (!EMAIL_RE.test(email)) {
+      msg.textContent = "Ingresá un email válido.";
+      msg.className = "mt-3 text-xs text-red-600";
+      emailInput.focus();
+      return;
+    }
+    if (message.length < 5) {
+      msg.textContent = "Escribí un mensaje un poco más completo.";
+      msg.className = "mt-3 text-xs text-red-600";
+      messageInput.focus();
+      return;
+    }
+    if (!terms.checked) {
+      msg.textContent = "Debés aceptar los Términos.";
+      msg.className = "mt-3 text-xs text-red-600";
+      terms.focus();
+      return;
+    }
+
+    // estado UI
+    btn.disabled = true;
+    msg.textContent = "Enviando…";
+    msg.className = "mt-3 text-xs text-neutral-500";
+
+    try {
+      const res = await fetch("https://formspree.io/f/xzzapqkw", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          message,
+          source: "contact-form",
+          page: window.location.href,
+        }),
+      });
+
+      if (!res.ok) throw new Error("Network error");
+
+      msg.textContent = "¡Gracias! Te responderemos pronto 👋";
+      msg.className = "mt-3 text-xs text-green-700";
+      form.reset();
+    } catch (error) {
+      msg.textContent = "Tuvimos un problema. Intentá de nuevo en unos minutos.";
+      msg.className = "mt-3 text-xs text-red-600";
+    } finally {
+      btn.disabled = false;
+    }
+  });
+})();
+
 // ===== EQUIPO: render desde JSON =====
 (function renderTeam() {
   const grid = document.getElementById('teamGrid');
@@ -292,3 +378,5 @@
     grid.innerHTML = '<p class="text-sm text-neutral-500">No pudimos cargar el equipo.</p>';
   });
 })();
+
+

@@ -72,7 +72,8 @@
                 <a href="/index.html" class="text-sm text-neutral-800 hover:text-neutral-950">Home</a>
                 <a href="#" class="text-sm text-neutral-800 hover:text-neutral-950">Quienes somos</a>
                 <a href="work.html" class="text-sm text-neutral-800 hover:text-neutral-950">Qué hacemos</a>
-                <a href="solutions.html" class="text-sm text-neutral-800 hover:text-neutral-950">Soluciones y Proyectos</a>
+                <a href="solutions.html" class="text-sm text-neutral-800 hover:text-neutral-950">Soluciones y
+                    Proyectos</a>
 
                 <!-- Dropdown -->
                 <div class="relative">
@@ -103,7 +104,7 @@
 
             <!-- Actions (desktop) -->
             <div class="hidden md:flex items-center gap-3">
-                <a href="#" class="btn btn-outline">Involucrate</a>
+                <a href="/involve.html" class="btn btn-outline">Involucrate</a>
                 <a href="#" class="btn btn-primary">Contactanos</a>
             </div>
 
@@ -123,9 +124,10 @@
         <div class="container mx-auto max-w-7xl px-4 py-3">
             <nav class="flex flex-col gap-2">
                 <a href="index.html" class="rounded-lg px-3 py-2 text-sm hover:bg-neutral-50">Home</a>
-                    <a href="about.html" class="rounded-lg px-3 py-2 text-sm hover:bg-neutral-50">Quienes somos</a>
-                    <a href="work.html" class="rounded-lg px-3 py-2 text-sm hover:bg-neutral-50">Qué hacemos</a>
-                    <a href="solutions.html" class="rounded-lg px-3 py-2 text-sm hover:bg-neutral-50">Soluciones y Proyectos</a>
+                <a href="about.html" class="rounded-lg px-3 py-2 text-sm hover:bg-neutral-50">Quienes somos</a>
+                <a href="work.html" class="rounded-lg px-3 py-2 text-sm hover:bg-neutral-50">Qué hacemos</a>
+                <a href="solutions.html" class="rounded-lg px-3 py-2 text-sm hover:bg-neutral-50">Soluciones y
+                    Proyectos</a>
 
                 <details class="rounded-lg px-3 py-2 text-sm open:bg-neutral-50">
                     <summary class="cursor-pointer list-none">Más recursos</summary>
@@ -137,8 +139,8 @@
                 </details>
 
                 <div class="mt-2 flex items-center gap-2">
-                    <a href="#" class="btn btn-outline flex-1">Involucrate</a>
-                    <a href="#" class="btn btn-primary flex-1">Contactanos</a>
+                    <a href="/involve.html" class="btn btn-outline flex-1">Involucrate</a>
+                    <a href="contact.html" class="btn btn-primary flex-1">Contactanos</a>
                 </div>
             </nav>
         </div>
@@ -147,8 +149,277 @@
 
 <body>
     <main>
+        <!-- HERO: Contacto -->
+        <section id="contact-hero" class="py-16 md:py-24">
+            <div class="container mx-auto max-w-7xl px-4">
+                <div class="max-w-3xl">
+                    <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight">
+                        Contáctanos Hoy
+                    </h1>
+                    <p class="mt-4 text-neutral-700">
+                        Estamos aquí para ayudarte. Llámanos o envíanos un correo y concertemos una reunión.
+                    </p>
 
-         </main>
+                </div>
+            </div>
+        </section>
+        <!-- CONTACTO: Formulario -->
+        <section class="py-16 md:py-20">
+            <div class="container mx-auto max-w-7xl px-4">
+                <div class="grid gap-10 md:grid-cols-2 lg:gap-16">
+                    <!-- Columna izquierda: imagen/mapa/placeholder -->
+                    <div
+                        class="rounded-2xl bg-neutral-200 aspect-[3/4] md:aspect-auto md:min-h-[540px] overflow-hidden grid place-items-center">
+                        <!-- Reemplazar por <img> o <iframe> (mapa) -->
+                        <svg class="h-14 w-14 text-neutral-400" viewBox="0 0 24 24" fill="currentColor"
+                            aria-hidden="true">
+                            <path
+                                d="M4 5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v14H4V5Zm2 0h12v9l-3.5-3.5a2 2 0 0 0-2.8 0L9 15l-2-2-3 3V5Z" />
+                        </svg>
+                    </div>
+
+                    <!-- Columna derecha: formulario -->
+                    <form id="contactForm" class="max-w-xl">
+                        <p class="text-sm font-semibold text-neutral-500">Completa el formulario</p>
+                        <h2 class="mt-1 text-3xl sm:text-4xl font-extrabold tracking-tight">Contáctanos</h2>
+                        <p class="mt-2 text-neutral-700">
+                            Estamos aquí para atender tus consultas y sugerencias.
+                        </p>
+
+                        <!-- Nombre -->
+                        <label for="contactName" class="mt-6 block text-sm font-medium text-neutral-900">Nombre</label>
+                        <input id="contactName" name="name" type="text" autocomplete="name" required
+                            class="mt-1 w-full border-0 border-b border-neutral-300 focus:border-blue-600 focus:ring-0 px-0 py-2"
+                            placeholder="Tu nombre" />
+
+                        <!-- Correo -->
+                        <label for="contactEmail" class="mt-5 block text-sm font-medium text-neutral-900">Correo</label>
+                        <input id="contactEmail" name="email" type="email" autocomplete="email" required
+                            class="mt-1 w-full border-0 border-b border-neutral-300 focus:border-blue-600 focus:ring-0 px-0 py-2"
+                            placeholder="tu@email.com" />
+
+                        <!-- Mensaje -->
+                        <label for="contactMessage"
+                            class="mt-5 block text-sm font-medium text-neutral-900">Mensaje</label>
+                        <textarea id="contactMessage" name="message" rows="5" required
+                            class="mt-1 w-full border-0 border-b border-neutral-300 focus:border-blue-600 focus:ring-0 px-0 py-2 resize-y"
+                            placeholder="Escribe tu mensaje..."></textarea>
+
+                        <!-- Honeypot (anti-bot) -->
+                        <input type="text" name="company" class="hidden" tabindex="-1" autocomplete="off" />
+
+                        <!-- Términos -->
+                        <div class="mt-5 flex items-start gap-2">
+                            <input id="contactTerms" type="checkbox"
+                                class="mt-1 h-4 w-4 rounded border-neutral-300 text-blue-600 focus:ring-blue-600"
+                                required />
+                            <label for="contactTerms" class="text-sm text-neutral-700">
+                                Acepto los <a href="/terminos"
+                                    class="underline decoration-neutral-300 hover:decoration-neutral-700">Términos</a>
+                            </label>
+                        </div>
+
+                        <!-- Estado + botón -->
+                        <p id="contactMsg" class="mt-3 text-xs text-neutral-500" aria-live="polite"></p>
+
+                        <button id="contactBtn" type="submit"
+                            class="mt-3 inline-flex items-center rounded-full bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">
+                            Enviar
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACTO: Información rápida -->
+        <section class="py-12 md:py-16">
+            <div class="container mx-auto max-w-7xl px-4">
+                <div class="grid gap-12 md:grid-cols-3 text-center">
+                    <!-- Correo -->
+                    <div>
+                        <div class="mx-auto mb-4 h-10 w-10 text-neutral-900">
+                            <!-- ícono sobre -->
+                            <svg viewBox="0 0 24 24" class="h-10 w-10" fill="none" stroke="currentColor"
+                                stroke-width="1.8">
+                                <path d="M4 6h16a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1Z" />
+                                <path d="m4 7 8 6 8-6" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-extrabold">Correo</h3>
+                        <p class="mt-2 text-neutral-700 max-w-sm mx-auto">
+                            ¡Hola! Te invitamos a enviar tus correos para cualquier consulta o comentario.
+                            Nos encantaría recibir tu mensaje.
+                        </p>
+                        <a href="mailto:info@fcs.org"
+                            class="mt-3 inline-block font-medium underline decoration-neutral-300 hover:decoration-neutral-700">
+                            info@fcs.org
+                        </a>
+                    </div>
+
+                    <!-- Teléfono -->
+                    <div>
+                        <div class="mx-auto mb-4 h-10 w-10 text-neutral-900">
+                            <!-- ícono teléfono -->
+                            <svg viewBox="0 0 24 24" class="h-10 w-10" fill="none" stroke="currentColor"
+                                stroke-width="1.8">
+                                <path
+                                    d="M22 16.92v2a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.11 3.18 2 2 0 0 1 4.11 1h2a2 2 0 0 1 2 1.72c.12.9.32 1.78.59 2.63a2 2 0 0 1-.45 2.11L7 8a16 16 0 0 0 6 6l.54-1.25a2 2 0 0 1 2.11-.45c.85.27 1.73.47 2.63.59A2 2 0 0 1 22 16.92Z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-extrabold">Teléfono</h3>
+                        <p class="mt-2 text-neutral-700 max-w-sm mx-auto">
+                            Te invitamos a que nos llames por teléfono para cualquier consulta. Estamos aquí para
+                            ayudarte.
+                        </p>
+                        <a href="tel:+34912345678"
+                            class="mt-3 inline-block font-medium underline decoration-neutral-300 hover:decoration-neutral-700">
+                            +34 912 345 678
+                        </a>
+                    </div>
+
+                    <!-- Oficinas -->
+                    <div>
+                        <div class="mx-auto mb-4 h-10 w-10 text-neutral-900">
+                            <!-- ícono pin -->
+                            <svg viewBox="0 0 24 24" class="h-10 w-10" fill="none" stroke="currentColor"
+                                stroke-width="1.8">
+                                <path d="M12 21s-7-5.33-7-11a7 7 0 1 1 14 0c0 5.67-7 11-7 11Z" />
+                                <circle cx="12" cy="10" r="2.5" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-extrabold">Oficinas</h3>
+                        <p class="mt-2 text-neutral-700 max-w-sm mx-auto">
+                            Tenemos oficinas en Buenos Aires y Barcelona. Eso nos permite impulsar actividades en las
+                            Américas y Europa.
+                        </p>
+                        <a href="/oficinas"
+                            class="mt-3 inline-block font-medium underline decoration-neutral-300 hover:decoration-neutral-700">
+                            Busca la oficina más cercana
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- OFICINAS -->
+        <section class="py-16 md:py-20">
+            <div class="container mx-auto max-w-7xl px-4">
+                <p class="text-sm font-semibold text-neutral-500 text-center">Ubicaciones</p>
+                <h2 class="mt-1 text-center text-3xl sm:text-4xl font-extrabold tracking-tight">
+                    Oficinas
+                </h2>
+                <p class="mt-2 text-center text-neutral-600 max-w-2xl mx-auto">
+                    Encuentra nuestras oficinas más cercanas a tu ubicación.
+                </p>
+
+                <div class="mt-10 grid gap-8 md:grid-cols-2">
+                    <!-- Buenos Aires -->
+                    <article class="rounded-2xl border bg-white overflow-hidden group">
+                        <a href="/contacto?office=buenos-aires" class="block">
+                            <div class="relative aspect-[16/9] bg-neutral-200 overflow-hidden">
+                                <img src="/assets/offices/buenos-aires.jpg" alt="Oficina de Buenos Aires (Américas)"
+                                    class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                                    loading="lazy" />
+                            </div>
+                        </a>
+
+                        <div class="p-5 sm:p-6">
+                            <h3 class="text-xl sm:text-2xl font-extrabold">
+                                Buenos Aires (Américas)
+                            </h3>
+                            <p class="mt-1 text-sm text-neutral-600">
+                                Avenida Del Libertador 1000, Vicente López, Argentina
+                            </p>
+
+                            <a href="/contacto?office=buenos-aires"
+                                class="mt-3 inline-flex items-center gap-2 text-sm font-semibold hover:underline">
+                                Contacto
+                                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"></path>
+                                </svg>
+                            </a>
+                        </div>
+                    </article>
+
+                    <!-- Barcelona -->
+                    <article class="rounded-2xl border bg-white overflow-hidden group">
+                        <a href="/contacto?office=barcelona" class="block">
+                            <div class="relative aspect-[16/9] bg-neutral-200 overflow-hidden">
+                                <img src="/assets/offices/barcelona.jpg" alt="Oficina de Barcelona (EMEA)"
+                                    class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                                    loading="lazy" />
+                            </div>
+                        </a>
+
+                        <div class="p-5 sm:p-6">
+                            <h3 class="text-xl sm:text-2xl font-extrabold">
+                                Barcelona (EMEA)
+                            </h3>
+                            <p class="mt-1 text-sm text-neutral-600">
+                                Carrer de Pallars, 194. Barcelona, España
+                            </p>
+
+                            <a href="/contacto?office=barcelona"
+                                class="mt-3 inline-flex items-center gap-2 text-sm font-semibold hover:underline">
+                                Contacto
+                                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"></path>
+                                </svg>
+                            </a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+        <!-- Boletín -->
+        <section id="boletin" class="py-12 md:py-16">
+            <div class="container mx-auto max-w-7xl px-4">
+                <div class="grid gap-10 md:grid-cols-2 lg:gap-16 items-start">
+                    <!-- Título -->
+                    <div>
+                        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight tracking-tight">
+                            Suscríbete a nuestro boletín
+                        </h2>
+                    </div>
+
+                    <!-- Texto + Form -->
+                    <div class="w-full md:justify-self-end max-w-xl">
+                        <p class="text-neutral-600 mb-3">
+                            Mantente al día con nuestras iniciativas y proyectos. Recibe noticias y
+                            actualizaciones directamente en tu bandeja de entrada.
+                        </p>
+
+                        <form id="subscribeForm" class="w-full">
+                            <!-- Honeypot (lo usa tu JS existente) -->
+                            <input type="text" name="company" tabindex="-1" autocomplete="off" class="hidden" />
+
+                            <label for="subscribeEmail" class="sr-only">Correo electrónico</label>
+                            <div class="flex items-center gap-3">
+                                <input id="subscribeEmail" name="email" type="email" required
+                                    placeholder="Ingresa tu correo"
+                                    class="peer w-full bg-transparent border-0 border-b border-neutral-300 focus:border-blue-600 focus:outline-none py-2 text-sm placeholder:text-neutral-400" />
+                                <button id="subscribeBtn" type="submit"
+                                    class="shrink-0 inline-flex items-center justify-center rounded-full bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-blue-700 disabled:opacity-60">
+                                    Suscribirse
+                                </button>
+                            </div>
+
+                            <p id="subscribeMsg" class="mt-2 text-xs text-neutral-500">
+                                Al hacer clic en Suscribirse, confirmas que aceptas nuestros
+                                <a href="/terminos"
+                                    class="underline decoration-neutral-300 hover:decoration-neutral-600">
+                                    Términos y Condiciones
+                                </a>.
+                            </p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+    </main>
 
 
     <!-- ===== Footer ===== -->
